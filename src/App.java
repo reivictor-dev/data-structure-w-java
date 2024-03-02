@@ -67,7 +67,7 @@ public class App {
             }
 
             //2. Alterar o valor de determinada posição.
-            if (sc.nextInt() == 1) {
+            if (sc.nextInt() == 2) {
                 
                 System.err.println("Insira o indice:");
                 posicao = sc.nextInt();
@@ -82,6 +82,40 @@ public class App {
                 userResolucao.setPosAndValue(posicao, valor);
 
                 continue;
+            }
+
+            //3. Remover o valor de determinada posição (atribui o valor indicativo de posição vaga).
+            if (sc.nextInt() == 3) {
+                System.err.println("Insira o indice:");
+                posicao = sc.nextInt();
+
+                System.out.println("Insira o valor");
+                valor = sc.nextInt();
+
+                if(valor == posVazio){
+                    System.out.println("Esta posição já esta vaga, insira um valor antes.");
+                    continue;
+                }
+
+                userResolucao.setPosAndValue(posicao, posVazio);
+                continue;
+            }
+
+            //"4. Ler o conteúdo de uma posição."
+            if(sc.nextInt() == 4){
+                System.err.println("Insira o indice:");
+                posicao = sc.nextInt();
+
+                for (int i = 0; i < arr.length; i++) {
+                    if(dados[posicao] == dados[i]){
+                        System.out.println( "O valor deste indice é: " + dados[i]);
+                        continue;
+                    } else {
+                        System.out.println("Indice inexistente!");
+                        continue;
+                    }
+                    
+                }
             }
 
             // 8. Imprimir o conteúdo do vetor.
