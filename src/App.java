@@ -3,7 +3,7 @@ import java.util.Scanner;
 public class App {
     public static void main(String[] args) throws Exception {
         Scanner sc = new Scanner(System.in);
-        
+
         int minimo, maximo, posicao, posVazio, valor, repetir;
         /*
          * 1. Atribuir um valor a determinada posição.
@@ -17,13 +17,13 @@ public class App {
          * 7. Remover da última posição ocupada (busca no sentido 0 → N).
          * 8. Imprimir o conteúdo do vetor.
          */
-        
+
         System.out.println("Escreva o valor minimo do seu conjunto:");
         minimo = sc.nextInt();
-        
+
         System.out.println("Escreva o valor maximo do seu conjunto:");
         maximo = sc.nextInt();
-        
+
         System.err.println("Escreva o valor padrao(posição vaga)");
         posVazio = sc.nextInt();
         // atribuir os valores default para os indices
@@ -33,11 +33,10 @@ public class App {
             arr[i] = posVazio;
         }
         userResolucao.setDados(arr);
-        
+
         int[] dados = userResolucao.getDados();
-        
+
         while (true) {
-            
 
             System.out.println("0. Parar aplicação!");
             System.out.println("1. Atribuir um valor a determinada posição.");
@@ -62,21 +61,26 @@ public class App {
                 System.out.println("Insira o valor");
                 valor = sc.nextInt();
 
+                if (arr[posicao] != posVazio) {
+                    System.out.println("Indice já utilizado!");
+                    continue;
+                }
+
                 userResolucao.setPosAndValue(posicao, valor);
 
                 continue;
             }
 
-            //2. Alterar o valor de determinada posição.
+            // 2. Alterar o valor de determinada posição.
             if (opcao == 2) {
-                
+
                 System.err.println("Insira o indice:");
                 posicao = sc.nextInt();
 
                 System.out.println("Insira o valor");
                 valor = sc.nextInt();
 
-                if(dados[posicao] == posVazio){
+                if (dados[posicao] == posVazio) {
                     System.out.println("Esta posição esta vaga, insira um valor antes.");
                     continue;
                 }
@@ -85,46 +89,31 @@ public class App {
                 continue;
             }
 
-            //3. Remover o valor de determinada posição (atribui o valor indicativo de posição vaga).
+            // 3. Remover o valor de determinada posição (atribui o valor indicativo de
+            // posição vaga).
             if (opcao == 3) {
                 System.err.println("Insira o indice:");
                 posicao = sc.nextInt();
-
-                System.out.println("Insira o valor");
-                valor = sc.nextInt();
-
-                if(valor == posVazio){
-                    System.out.println("Esta posição já esta vaga, insira um valor antes.");
-                    continue;
-                }
 
                 userResolucao.setPosAndValue(posicao, posVazio);
                 continue;
             }
 
-            //"4. Ler o conteúdo de uma posição."
-            if(opcao == 4){
+            // "4. Ler o conteúdo de uma posição."
+            if (opcao == 4) {
                 System.err.println("Insira o indice:");
                 posicao = sc.nextInt();
 
-                for (int i = 0; i < arr.length; i++) {
-                    if(dados[posicao] == dados[i]){
-                        System.out.println( "O valor deste indice é: " + dados[i]);
-                        continue;
-                    } else {
-                        System.out.println("Indice inexistente!");
-                        continue;
-                    }
-                    
-                }
+                System.out.println("Conteudo da posição " + posicao + " é: " + dados[posicao]);
+
             }
 
-            //6. Inserir na primeira posição vaga (busca no sentido 0 → N).
-            if(opcao == 6){
+            // 6. Inserir na primeira posição vaga (busca no sentido 0 → N).
+            if (opcao == 6) {
                 System.out.println("Insira um valor na primeira posição vaga");
                 valor = sc.nextInt();
 
-                for (int i = 0; i < arr.length; i++) {
+                for (int i = minimo; i < arr.length; i++) {
                     if (dados[i] == posVazio) {
                         dados[i] = valor;
                         break;
@@ -132,11 +121,11 @@ public class App {
                 }
             }
 
-            //7. Remover da última posição ocupada (busca no sentido 0 → N).
-            if(opcao == 7) {
-                
-                for(int i = arr.length-1;i >=0; i--) {
-                    if(dados[i] != posVazio) {
+            // 7. Remover da última posição ocupada (busca no sentido 0 → N).
+            if (opcao == 7) {
+
+                for (int i = arr.length - 1; i >= 0; i--) {
+                    if (dados[i] != posVazio) {
                         dados[i] = posVazio;
                         break;
                     }
